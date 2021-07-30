@@ -1,0 +1,10 @@
+<div fxLayout="row wrap" id="breadcrumb">
+  <a *ngFor="let breadcrumb of breadcrumbs; let i = index" fxLayout="row" fxLayoutAlign="text center" [routerLink]="breadcrumb.route">
+    <div *ngIf="!breadcrumb.isActive">{{breadcrumb.label}}</div>
+    <div *ngIf="!breadcrumb.isActive" class="separator">
+     /
+    </div>
+
+    <div class="is-active" *ngIf="breadcrumb.isActive">{{breadcrumb.label}}</div>
+  </a>
+</div>

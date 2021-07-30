@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Breadcrumb } from 'src/app/shared/models/breadcrumb';
 
 @Component({
   selector: 'app-functional-testing-home',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FunctionalTestingHomeComponent implements OnInit {
 
-  constructor() { }
+  breadcrumbs!: Breadcrumb[];
+
+  constructor() {
+    this.breadcrumbs = new Array<Breadcrumb>();
+    this.breadcrumbs.push(new Breadcrumb('Home', ''));
+    this.breadcrumbs.push(new Breadcrumb('Functional testing', '/functional-testing', true));
+  }
 
   ngOnInit(): void {
   }

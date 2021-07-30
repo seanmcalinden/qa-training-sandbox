@@ -9,6 +9,11 @@ const routes: Routes = [
       {
         path: '',
         component: FunctionalTestingHomeComponent
+      },
+      {
+        path: 'equivalence-partitioning',
+        loadChildren: () => import('./../equivalence-partitioning/equivalence-partitioning.module')
+        .then(m => m.EquivalencePartitioningModule)
       }
     ]
   }

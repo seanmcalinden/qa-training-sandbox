@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-main-navigation',
@@ -10,6 +12,7 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class MainNavigationComponent {
 
+  currentPath: string = '';
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -17,5 +20,12 @@ export class MainNavigationComponent {
     );
 
   constructor(
-    private breakpointObserver: BreakpointObserver) {}
+    location: Location,
+    private router: Router,
+    private breakpointObserver: BreakpointObserver) {
+      router.events.subscribe(val => {
+        this.currentPath = location.path();
+        console.log('PATH', this.currentPath);
+      });
+    }
 }
