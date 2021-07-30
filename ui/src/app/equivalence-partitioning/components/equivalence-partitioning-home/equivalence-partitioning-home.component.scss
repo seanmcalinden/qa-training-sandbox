@@ -1,0 +1,22 @@
+@import '../../../../scss/colors.scss';
+.examples {
+  margin-top: 10px;
+}
+
+.examples a {
+  background-color: $aLittleDarker;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: $darkShadow;
+  margin-bottom: 5px;
+}
+
+.examples a .icon {
+  margin-right: 10px;
+}
+
+.link-type {
+  color: $accentLight;
+  width: 70px;
+}

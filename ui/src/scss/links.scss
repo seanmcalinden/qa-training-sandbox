@@ -1,0 +1,13 @@
+@import './colors.scss';
+a {
+  text-decoration: none;
+  color: $lightText;
+}
+
+a:hover {
+  color: #2db6e0 !important;
+}
+
+.is-active {
+  color: #2db6e0 !important;
+}

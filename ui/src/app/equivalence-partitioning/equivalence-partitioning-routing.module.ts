@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EquivalencePartitioningExampleOneComponent } from './components/equivalence-partitioning-example-one/equivalence-partitioning-example-one.component';
 import { EquivalencePartitioningHomeComponent } from './components/equivalence-partitioning-home/equivalence-partitioning-home.component';
 
 const routes: Routes = [
@@ -9,12 +10,11 @@ const routes: Routes = [
       {
         path: '',
         component: EquivalencePartitioningHomeComponent
+      },
+      {
+        path: 'example-1',
+        component: EquivalencePartitioningExampleOneComponent
       }
-      // {
-      //   path: 'equivalence-partitioning',
-      //   loadChildren: () => import('./../equivalence-partitioning/equivalence-partitioning.module')
-      //   .then(m => m.EquivalencePartitioningModule)
-      // }
     ]
   }
 ];

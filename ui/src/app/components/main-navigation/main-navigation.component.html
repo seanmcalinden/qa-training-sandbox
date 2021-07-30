@@ -5,12 +5,12 @@
       [opened]="false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [ngClass]="{'active': currentPath === '' }" routerLink="" (click)="drawer.toggle()">Home</a>
-      <a mat-list-item [ngClass]="{'active': currentPath.indexOf('/functional-testing') > -1 }" routerLink="/functional-testing" (click)="drawer.toggle()">Functional testing</a>
+      <a mat-list-item [ngClass]="{'is-active': currentPath === '' }" routerLink="" (click)="drawer.toggle()">Home</a>
+      <a mat-list-item [ngClass]="{'is-active': currentPath.indexOf('/functional-testing') > -1 }" routerLink="/functional-testing" (click)="drawer.toggle()">Functional testing</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" fxLayoutAlign="left center">
+    <mat-toolbar class="background" fxLayoutAlign="left center">
       <button
         type="button"
         aria-label="Toggle sidenav"

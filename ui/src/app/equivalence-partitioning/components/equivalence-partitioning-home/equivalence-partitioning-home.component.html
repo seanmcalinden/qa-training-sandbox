@@ -1,1 +1,104 @@
 <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+<div id="container">
+  <h1>Equivalence partitioning</h1>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Summary </mat-panel-title>
+      </mat-expansion-panel-header>
+
+
+      <mat-tab-group>
+        <mat-tab label="Description">
+          <p>
+            Equivalance partitioning is where you divide input data into valid and
+            invalid chunks.
+          </p>
+        </mat-tab>
+        <mat-tab label="Example partitions">
+          <p>
+            Let's say we have a <strong>Username</strong> textbox with the following
+            rules:
+          </p>
+          <ul>
+            <li>Must be at least <strong>2</strong> characters</li>
+            <li>Must not be more than <strong>10</strong> characters</li>
+          </ul>
+          <p>There are 3 chunks we can create here:</p>
+          <table class="table" cellPadding="0" cellSpacing="0">
+            <thead>
+              <tr>
+                <th class="invalid">Invalid</th>
+                <th class="valid">Valid</th>
+                <th class="invalid">Invalid</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0-1</td>
+                <td>2-10</td>
+                <td>11+</td>
+              </tr>
+              <tr>
+                <td>
+                  Whether the length of the username is 0 or 1 characters long, the
+                  validation will show the username as invalid.
+                </td>
+                <td>
+                  Where the length of the username is 2, 3, 4, 5, 6, 7, 8, 9 or 10
+                  characters long, the validation will show the username as valid.
+                </td>
+                <td>
+                  For any username more than 10 characters long, the validation will
+                  show the username as invalid, whether the length is 11, 12, 100,
+                  10,000 and so on.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+        <mat-tab label="Try it out">
+          <p>Write some text in the textbox to see the error messages:</p>
+          <form [formGroup]="example1Form">
+            <mat-form-field>
+              <mat-label>Username</mat-label>
+              <input
+                type="email"
+                matInput
+                [formControl]="exampleInput"
+                [errorStateMatcher]="matcher"
+              />
+              <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+              <mat-error *ngIf="exampleInput.hasError('required')">
+                Must be at least <strong>2</strong> characters
+              </mat-error>
+              <mat-error *ngIf="exampleInput.hasError('minlength')">
+                Must be at least <strong>2</strong> characters
+              </mat-error>
+              <mat-error *ngIf="exampleInput.hasError('maxlength')">
+                Max <strong>10</strong> characters
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="examples">
+    <a routerLink="example-1" fxLayoutAlign="left center" fxLayout="row">
+     <div class="icon" fxLayoutAlign="center"><mat-icon inline="true">school</mat-icon></div>
+     <div class="link-type">LEARN:</div>
+    <div>Example 1: Min length name</div></a>
+
+    <a routerLink="example-1" fxLayoutAlign="left center" fxLayout="row">
+      <div class="icon" fxLayoutAlign="center"><mat-icon inline="true">try</mat-icon></div>
+      <div class="link-type">TRY:</div>
+     <div>Example 2</div></a>
+
+
+  </div>
+</div>

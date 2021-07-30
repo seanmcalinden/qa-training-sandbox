@@ -1,0 +1,77 @@
+<app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+<h1>Example 1: Min length name</h1>
+<div fxLayout="row" fxLayoutGap="10px">
+  <div fxFlex="50">
+
+    <mat-tab-group>
+      <mat-tab label="User story">
+        <p>As a new user</p>
+        <p>I would like to create a username that is at least <strong>5</strong> characters long</p>
+        <p>So that I can create a great username</p>
+      </mat-tab>
+      <mat-tab label="Acceptance criteria">
+        <p><strong class="accent-light">1.</strong> When I enter less than 5 characters</p>
+        <p>A validation message should appear stating: 'A minimum of 5 characters is required'</p>
+        <hr class="light-dotted" />
+        <p><strong class="accent-light">2.</strong> When I enter 5 characters or more</p>
+        <p>The name is valid</p>
+      </mat-tab>
+      <mat-tab label="Partitions">
+        <p>
+          There are 2 partitions we can extract from the acceptance criteria.
+        </p>
+        <p>Acceptance criteria <strong class="accent-light">1</strong> tells us that anything with less than 5 characters is invalid.</p>
+        <p>Acceptance criteria <strong class="accent-light">2</strong> tells us that anything with 5 or more characters is valid.</p>
+        <table>
+          <thead>
+            <tr>
+              <th class="invalid">Invalid</th>
+              <th class="valid">Valid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0-4</td>
+              <td>5+</td>
+            </tr>
+            <tr>
+              <td>
+                Whether the length of the name is 0, 1, 2, 3 or 4 characters long, the validation will show the username as invalid.
+              </td>
+              <td>
+                For any names that are 5 characters or more, the validation will show the username as valid
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div fxFlex="50">
+    <mat-card>
+      <h2>Try it</h2>
+
+      <div>
+        <form [formGroup]="form">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input
+              type="text"
+              matInput
+              [formControl]="input1"
+              [errorStateMatcher]="matcher"
+            />
+            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+            <mat-error *ngIf="input1.hasError('required')">
+              A minimum of 5 characters is required
+            </mat-error>
+            <mat-error *ngIf="input1.hasError('minlength')">
+              A minimum of 5 characters is required
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>

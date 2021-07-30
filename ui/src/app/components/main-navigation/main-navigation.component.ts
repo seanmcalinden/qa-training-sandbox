@@ -13,6 +13,7 @@ import { Location } from "@angular/common";
 export class MainNavigationComponent {
 
   currentPath: string = '';
+  isDarkTheme = true;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),

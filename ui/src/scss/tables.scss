@@ -1,0 +1,18 @@
+@import './colors.scss';
+
+table {
+  width: 100%;
+  text-align: left;
+  border-collapse:collapse;
+}
+
+th {
+  padding: 5px;
+  border: solid 1px $aLittleDark;
+  border-bottom:none;
+}
+
+td {
+  padding: 5px;
+  border: solid 1px $aLittleDark;
+}

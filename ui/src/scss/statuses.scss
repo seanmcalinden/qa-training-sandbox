@@ -1,0 +1,11 @@
+@import './colors.scss';
+
+.invalid {
+  background-color: $invalid;
+  color: $lightText;
+}
+
+.valid {
+  background-color: $valid;
+  color: $lightText;
+}
