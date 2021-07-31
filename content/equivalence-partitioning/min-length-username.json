@@ -1,0 +1,49 @@
+{
+    "title": "Min length username",
+    "slug": "min-length-username",
+    "tutorialType": "learn",
+    "userStory": "<p>As a user</p><p>I would like to create a username that is at least <strong>5</strong> characters long</p><p>So that I can create a great username</p>",
+    "acceptanceCriteria":[
+        "<p><strong class=\"accent-light\">1.</strong> When I enter less than 5 characters</p><p>A validation message should appear stating: 'A minimum of 5 characters is required'</p>",
+        "<p><strong class=\"accent-light\">2.</strong> When I enter 5 characters or more</p><p>The name is valid</p>"
+    ],
+    "partitions": [
+         {
+             "type": "Invalid",
+             "description": "Anything with less than 5 characters is invalid",
+             "example": "0-4",
+             "exampleDescription": "Whether the length of the name is 0, 1, 2, 3 or 4 characters long, the validation will show the username as invalid"
+         },
+         {
+             "type": "Valid",
+             "description": "Anything with 5 or more characters is valid",
+             "example": "5+",
+             "exampleDescription": "For any names that are 5 characters or more, the validation will show the username as valid"
+         }     
+    ],
+    "formControls": [
+        {
+            "type": "textbox",
+            "label": "Username",
+            "placeholder": "Enter a username",
+            "validations": [
+                {
+                    "errorType": "required",
+                    "message": "A minimum of 5 characters is required",
+                    "bug": {
+                        "hasBug": false
+                    }
+                },
+                {
+                    "errorType": "minlength",
+                    "message": "A minimum of 5 characters is required",
+                    "config": 5,
+                    "bug": {
+                        "hasBug": true,
+                        "config": null
+                    }
+                }
+            ]
+        }
+    ]
+}

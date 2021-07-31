@@ -1,0 +1,90 @@
+<ng-container *ngIf="equivalencePartitioningTutorial | async as tutorial">
+  <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+<h1 fxLayoutAlign="text center">
+  <mat-icon class="title-icon" *ngIf="tutorial.tutorialType==='learn'" inline="true">
+    school
+  </mat-icon>
+  <span class="title-text">{{tutorial.title}}</span></h1>
+<div fxLayout="row" fxLayoutGap="10px">
+  <div fxFlex="50">
+
+    <mat-tab-group>
+      <mat-tab label="User story">
+        <div [innerHTML]="tutorial.userStory"></div>
+      </mat-tab>
+      <mat-tab label="Acceptance criteria">
+
+        <ng-container *ngFor="let criteria of tutorial.acceptanceCriteria; let i = index">
+          <div [innerHTML]="criteria"></div>
+          <hr class="light-dotted" *ngIf="i !== tutorial.acceptanceCriteria.length - 1" />
+        </ng-container>
+
+      </mat-tab>
+      <mat-tab label="Partitions">
+        <p>
+          There are {{tutorial.acceptanceCriteria.length}} partitions we can extract from the acceptance criteria.
+        </p>
+
+        <ul>
+          <li *ngFor="let partition of tutorial.partitions">
+            {{partition.description}}
+          </li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th class="invalid" [ngClass]="{'invalid': partition.type === 'Invalid', 'valid': partition.type === 'Valid'}" *ngFor="let partition of tutorial.partitions">{{partition.type}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td *ngFor="let partition of tutorial.partitions">{{partition.example}}</td>
+            </tr>
+            <tr>
+              <td *ngFor="let partition of tutorial.partitions">{{partition.exampleDescription}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div fxFlex="50">
+    <mat-card>
+      <h2>Try it</h2>
+
+      <ng-container *ngIf="formIsReady">
+        <form [formGroup]="form">
+          <mat-form-field *ngFor="let control of tutorial.formControls; let i = index">
+            <mat-label>{{control.label}}</mat-label>
+            <input
+              *ngIf="control.type === 'textbox'"
+              type="text"
+              matInput
+              [formControlName]="'control-' + (i + 1)"
+              [errorStateMatcher]="matcher"
+            />
+            <mat-error *ngIf="form.controls['control-' + (i + 1)].hasError('minlength')">
+              A minimum of 5 characters is required
+            </mat-error>
+            <!-- <span *ngFor="let validation of control.validations">
+              <mat-error *ngIf="form.controls['control-' + (i + 1)].hasError(validation.errorType)">
+                {{validation.message}}
+              </mat-error>
+            </span> -->
+            <!-- <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="input1.hasError('required')">
+              A minimum of 5 characters is required
+            </mat-error>
+            <mat-error *ngIf="input1.hasError('minlength')">
+              A minimum of 5 characters is required
+            </mat-error> -->
+          </mat-form-field>
+        </form>
+      </ng-container>
+    </mat-card>
+  </div>
+</div>
+
+</ng-container>

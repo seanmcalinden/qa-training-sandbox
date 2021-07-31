@@ -26,7 +26,6 @@ export class MainNavigationComponent {
     private breakpointObserver: BreakpointObserver) {
       router.events.subscribe(val => {
         this.currentPath = location.path();
-        console.log('PATH', this.currentPath);
       });
     }
 }

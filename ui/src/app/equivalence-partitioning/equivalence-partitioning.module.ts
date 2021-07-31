@@ -12,11 +12,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { EquivalencePartitioningExampleOneComponent } from './components/equivalence-partitioning-example-one/equivalence-partitioning-example-one.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
+import { EquivalencePartitioningTutorialComponent } from './components/equivalence-partitioning-tutorial/equivalence-partitioning-tutorial.component';
 
 @NgModule({
   declarations: [
     EquivalencePartitioningHomeComponent,
-    EquivalencePartitioningExampleOneComponent
+    EquivalencePartitioningExampleOneComponent,
+    EquivalencePartitioningTutorialComponent
   ],
   imports: [
     CommonModule,
