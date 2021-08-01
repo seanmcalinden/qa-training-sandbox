@@ -4,7 +4,9 @@
   <mat-icon class="title-icon" *ngIf="tutorial.tutorialType==='learn'" inline="true">
     school
   </mat-icon>
-  <span class="title-text">{{tutorial.title}}</span></h1>
+  <span class="title-text">{{tutorial.title}}</span>
+  <span class="difficulty">Difficulty: {{tutorial.difficulty}}/10</span>
+</h1>
 <div fxLayout="row" fxLayoutGap="10px">
   <div fxFlex="50">
 
@@ -15,37 +17,90 @@
       <mat-tab label="Acceptance criteria">
 
         <ng-container *ngFor="let criteria of tutorial.acceptanceCriteria; let i = index">
-          <div [innerHTML]="criteria"></div>
+          <div fxLayout="row">
+            <div fxFlex="20px" class="accent-light"><p><strong>{{i+1}}.</strong></p></div>
+            <div fxFlex="grow" [innerHTML]="criteria"></div>
+          </div>
+
           <hr class="light-dotted" *ngIf="i !== tutorial.acceptanceCriteria.length - 1" />
         </ng-container>
 
       </mat-tab>
+
       <mat-tab label="Partitions">
-        <p>
-          There are {{tutorial.acceptanceCriteria.length}} partitions we can extract from the acceptance criteria.
-        </p>
 
-        <ul>
-          <li *ngFor="let partition of tutorial.partitions">
-            {{partition.description}}
-          </li>
-        </ul>
+        <ng-container *ngIf="tutorial.tutorialType === 'try'">
+          <h2>Exercise</h2>
+          <p>Try and work out the partitions yourself from the acceptance criteria.</p>
+          <p>When you are ready to check, click on the 'Show partitions' button to see how you did.</p>
+          <p><em>Use the green thumbs up to add a valid partition and the red thumbs down for an invalid partition.</em></p>
+        </ng-container>
 
-        <table>
-          <thead>
-            <tr>
-              <th class="invalid" [ngClass]="{'invalid': partition.type === 'Invalid', 'valid': partition.type === 'Valid'}" *ngFor="let partition of tutorial.partitions">{{partition.type}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td *ngFor="let partition of tutorial.partitions">{{partition.example}}</td>
-            </tr>
-            <tr>
-              <td *ngFor="let partition of tutorial.partitions">{{partition.exampleDescription}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div *ngIf="tutorial.tutorialType === 'try'">
+          <div class="actions">
+            <button mat-mini-fab class="valid" matTooltipPosition="above" matTooltip="Add valid partition" (click)="addTryPartition('Valid')">
+              <mat-icon>
+                thumb_up
+              </mat-icon>
+            </button>
+            <button mat-mini-fab class="invalid" matTooltipPosition="above" matTooltip="Add invalid partition" (click)="addTryPartition('Invalid')">
+              <mat-icon>
+                thumb_down
+              </mat-icon>
+            </button>
+          </div>
+
+          <div class="try-row-container">
+            <div class="try-row" fxLayout="row" *ngFor="let try of tryPartitions; let i = index">
+              <div fxFlex="70px" class="try-row-type" [ngClass]="{'valid': try.type === 'Valid', 'invalid': try.type === 'Invalid'}" fxLayoutAlign="text center">{{try.type}}</div>
+              <input fxFlex="grow" type="text" matInput placeholder="Add short description">
+              <div class="try-row-buttons" fxFlex="150px">
+                <button mat-icon-button matTooltip="Move up" *ngIf="i > 0" (click)="moveUp(i)">
+                  <mat-icon>
+                    expand_less
+                  </mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Move down" *ngIf="i < tryPartitions.length - 1"  (click)="moveDown(i)">
+                  <mat-icon>
+                    expand_more
+                  </mat-icon>
+                </button>
+                <button mat-icon-button color="warn" matTooltip="Delete partition" (click)="deletePartition(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="toggle-partitions" *ngIf="tutorial.tutorialType === 'try'">
+          <button mat-raised-button (click)="togglePartitionsHandler()">
+            <span *ngIf="!showPartitions">Show partitions</span>
+            <span *ngIf="showPartitions">Hide partitions</span>
+          </button>
+        </div>
+
+        <ng-container *ngIf="showPartitions">
+          <p>
+            There are {{tutorial.partitions.length}} partitions we can extract from the acceptance criteria.
+          </p>
+
+          <ul>
+            <li *ngFor="let partition of tutorial.partitions">
+              {{partition.description}}
+            </li>
+          </ul>
+
+          <mat-card class="partition-cards" *ngFor="let partition of tutorial.partitions">
+            <div class="partition-title" [ngClass]="{'invalid': partition.type === 'Invalid', 'valid': partition.type === 'Valid'}">{{partition.type}}</div>
+            <div class="example">{{partition.example}}</div>
+            <hr *ngIf="partition.example" class="light-dotted" />
+            <div class="example">{{partition.exampleDescription}}</div>
+          </mat-card>
+        </ng-container>
       </mat-tab>
     </mat-tab-group>
   </div>
@@ -65,6 +120,14 @@
               [formControlName]="'control-' + (i + 1)"
               [errorStateMatcher]="matcher"
             />
+
+            <textarea
+            *ngIf="control.type === 'textarea'"
+            matInput
+            [formControlName]="'control-' + (i + 1)"
+            [errorStateMatcher]="matcher"
+            ></textarea>
+            <mat-hint *ngIf="control.showCount && (control.type === 'textbox' || control.type === 'textarea')" class="character-count">{{form.controls['control-' + (i + 1)].value.length}}</mat-hint>
             <mat-error>
               <div *ngFor="let validation of control.validations">
                 <span *ngIf="form.controls['control-' + (i + 1)].hasError(validation.errorType)">
@@ -72,7 +135,9 @@
                 </span>
               </div>
             </mat-error>
+
           </mat-form-field>
+
         </form>
       </ng-container>
     </mat-card>

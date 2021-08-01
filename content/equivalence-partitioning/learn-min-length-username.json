@@ -2,10 +2,11 @@
     "title": "Min length username",
     "slug": "min-length-username",
     "tutorialType": "learn",
+    "difficulty": 2,
     "userStory": "<p>As a user</p><p>I would like to create a username that is at least <strong>5</strong> characters long</p><p>So that I can create a great username</p>",
     "acceptanceCriteria":[
-        "<p><strong class=\"accent-light\">1.</strong> When I enter less than 5 characters</p><p>A validation message should appear stating: 'A minimum of 5 characters is required'</p>",
-        "<p><strong class=\"accent-light\">2.</strong> When I enter 5 characters or more</p><p>The name is valid</p>"
+        "<p>When I enter less than 5 characters</p><p>A validation message should appear stating: 'A minimum of 5 characters is required'</p>",
+        "<p>When I enter 5 characters or more</p><p>The name is valid</p>"
     ],
     "partitions": [
          {
@@ -24,6 +25,7 @@
     "formControls": [
         {
             "type": "textbox",
+            "showCount": true,
             "label": "Username",
             "placeholder": "Enter a username",
             "validations": [

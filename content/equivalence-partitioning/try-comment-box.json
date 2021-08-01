@@ -1,0 +1,87 @@
+{
+    "title": "Comment box",
+    "slug": "try-comment-box",
+    "tutorialType": "try",
+    "difficulty": 4,
+    "userStory": "<p>As a user</p><p>I would like to comment on a blog post<p>So I can let the writer know how great their article is</p>",
+    "acceptanceCriteria":[
+        "<p>When I enter no characters</p><p>A validation message should appear stating: 'Comment is required'</p>",
+        "<p>When I enter less than 20 characters</p><p>A validation message should appear stating: 'Min 20 characters required'</p>",
+        "<p>When I enter any characters other than letters, numbers, spaces, commas and full-stops</p><p>A validation message should appear stating: 'Only letters, numbers, spaces, commas and full stops are allowed'</p>",        
+        "<p>When I enter allowed characters between 20 and 100 characters inclusive</p><p>The comment is valid</p>",
+        "<p>When I enter more than 100 characters</p><p>A validation message should appear stating: 'Max 100 characters allowed'</p>"
+    ],
+    "partitions": [
+         {
+             "type": "Invalid",
+             "description": "Inputting no characters is invalid",
+             "example": "",
+             "exampleDescription": "If no characters are entered, the validation will show the comment as invalid"
+         },
+         {
+            "type": "Invalid",
+            "description": "Inputting less than 20 characters is invalid",
+            "example": "not long enough",
+            "exampleDescription": "If there are less than 20 characters the comment is invalid"
+        },
+         {
+            "type": "Invalid",
+            "description": "Inputting characters that are not allowed is invalid",
+            "example": "!, £, $, <, >, /, @ etc.",
+            "exampleDescription": "Anything entered that is not allowed is invalid, the validation will show the comment as invalid"
+        },
+         {
+             "type": "Valid",
+             "description": "Inputting  between 20 and 100 allowed characters inclusive is valid",
+             "example": "This is my 1st comment, and I can write up to 100 characters.",
+             "exampleDescription": "Between 1 and 100 inclusive allowed characters are valid"
+         },
+         {
+             "type": "More than 100 characters is invalid",
+             "description": "",
+             "example": "101+",
+             "exampleDescription": "Numbers greater than 100 such as 101, 999, 10,000 will show the age as invalid"
+         }      
+    ],
+    "formControls": [
+        {
+            "type": "textarea",
+            "showCount": true,
+            "label": "Comment",
+            "placeholder": "Enter your comment",
+            "validations": [
+                {
+                    "errorType": "required",
+                    "message": "Comment is required",
+                    "bug": {
+                        "hasBug": false
+                    }
+                },
+                {
+                    "errorType": "minlength",
+                    "message": "Min 20 characters required",
+                    "config": 20,
+                    "bug": {
+                        "hasBug": false
+                    }
+                },
+                {
+                    "errorType": "maxlength",
+                    "message": "Max 100 characters allowed",
+                    "config": 100,
+                    "bug": {
+                        "hasBug": false
+                    }
+                },
+                {
+                    "errorType": "pattern",
+                    "regex": "^[a-zA-Z0-9., ]*$",
+                    "message": "Only letters, numbers, spaces, commas and full stops are allowed",
+                    "bug": {
+                        "hasBug": false
+                    }
+                }
+            ]
+        }
+    ]
+}

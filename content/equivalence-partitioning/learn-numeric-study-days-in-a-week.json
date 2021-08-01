@@ -1,0 +1,70 @@
+{
+    "title": "Numeric study days in a week",
+    "slug": "numeric-study-days-in-a-week",
+    "tutorialType": "learn",
+    "difficulty": 3,
+    "userStory": "<p>As a student</p><p>I would like to input the number of days I will study per week<p>So I can commit to my learning</p>",
+    "acceptanceCriteria":[
+        "<p>When I enter no numbers</p><p>A validation message should appear stating: 'A number of days is required'</p>",
+        "<p>When I enter less than 1 or greater than 7</p><p>Or I enter a non-numeric value</p><p>A validation message should appear stating: 'Please enter a number between 1 and 7'</p>",
+        "<p>When I enter between 1 and 7 inclusive</p><p>The number of study days is valid</p>"
+    ],
+    "partitions": [
+         {
+             "type": "Invalid",
+             "description": "Inputting no number is invalid",
+             "example": "",
+             "exampleDescription": "If a number is not entered, the validation will show the study days as invalid"
+         },
+         {
+            "type": "Invalid",
+            "description": "Inputting 0 or less numbers is invalid",
+            "example": "0, -1, -2, -3 etc.",
+            "exampleDescription": "If 0, -1, -2, - 3 and so on are entered, the validation will show the study days as invalid as they are below the minimum value"
+        },
+        {
+            "type": "Invalid",
+            "description": "Inputting non-numeric characters is invalid",
+            "example": "a, b, c, d, !, £, $ etc.",
+            "exampleDescription": "If anything other than a number is added such as letters and special characters, the validation will show the study days as invalid as they are below the minimum value"
+        },
+         {
+             "type": "Valid",
+             "description": "Inputting numbers between 1 and 7 inclusive is valid",
+             "example": "1-7",
+             "exampleDescription": "if any of the following numbers: 1, 2, 3, 4, 5, 6, 7 are entered, the study days will show as valid"
+         },
+         {
+            "type": "Invalid",
+            "description": "Inputting more than 7 is invalid",
+            "example": "8+",
+            "exampleDescription": "If 8 or more is entered, the validation will show the study days as invalid as it is above the maximum number allowed"
+        }  
+    ],
+    "formControls": [
+        {
+            "type": "textbox",
+            "showCount": false,
+            "label": "Study days",
+            "placeholder": "Enter your number of study days",
+            "validations": [
+                {
+                    "errorType": "required",
+                    "message": "A number of days is required",
+                    "bug": {
+                        "hasBug": false
+                    }
+                },
+                {
+                    "errorType": "pattern",
+                    "regex": "^[1-7]$",
+                    "message": "Please enter a number between 1 and 7",
+                    "config": 1,
+                    "bug": {
+                        "hasBug": false
+                    }
+                }
+            ]
+        }
+    ]
+}

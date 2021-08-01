@@ -1,0 +1,72 @@
+{
+    "title": "Min and max length company name",
+    "slug": "min-max-length-company-name",
+    "tutorialType": "learn",
+    "difficulty": 3,
+    "userStory": "<p>As a user</p><p>I would like to input my company name<p>So the website knows who I work for</p>",
+    "acceptanceCriteria":[
+        "<p>When I enter no characters</p><p>A validation message should appear stating: 'Company name is required'</p>",
+        "<p>When I enter less than 3 characters</p><p>A validation message should appear stating: 'A minimum of 3 characters is required'</p>",
+        "<p>When I enter between 3 and 20 characters</p><p>The company name is valid</p>",
+        "<p>When I enter 21 or more characters</p><p>A validation message should appear stating: 'A maximum of 20 characters is allowed'</p>"
+    ],
+    "partitions": [
+         {
+             "type": "Invalid",
+             "description": "Inputting no characters is invalid",
+             "example": "",
+             "exampleDescription": "If no characters are entered, the validation will show the company name as invalid"
+         },
+         {
+            "type": "Invalid",
+            "description": "Inputting 1 or 2 characters is invalid",
+            "example": "1-2",
+            "exampleDescription": "If 1 or 2 characters are entered, the validation will show the company name as invalid as it is below the minimum characters required"
+        },
+         {
+             "type": "Valid",
+             "description": "Inputting characters between 3 and 20 inclusive is valid",
+             "example": "3-20",
+             "exampleDescription": "if characters 3, 4, 5, 6, 7, 8 and so on up to and including 20 characters are entered, the company name will show as valid"
+         },
+         {
+            "type": "Invalid",
+            "description": "Inputting more than 20 characters is invalid",
+            "example": "21+",
+            "exampleDescription": "If 21 or more characters are entered, the validation will show the company name as invalid as it is above the maximum characters required"
+        }  
+    ],
+    "formControls": [
+        {
+            "type": "textbox",
+            "showCount": true,
+            "label": "Company name",
+            "placeholder": "Enter a company name",
+            "validations": [
+                {
+                    "errorType": "required",
+                    "message": "Company name is required",
+                    "bug": {
+                        "hasBug": false
+                    }
+                },
+                {
+                    "errorType": "minlength",
+                    "message": "A minimum of 3 characters is required",
+                    "config": 3,
+                    "bug": {
+                        "hasBug": false
+                    }
+                },
+                {
+                    "errorType": "maxlength",
+                    "message": "A maximum of 20 characters is allowed",
+                    "config": 20,
+                    "bug": {
+                        "hasBug": false                        
+                    }
+                }
+            ]
+        }
+    ]
+}

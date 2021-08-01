@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 import { Breadcrumb } from 'src/app/shared/models/breadcrumb';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MyErrorStateMatcher } from 'src/app/shared/utilities/error-state-matcher';
-import { EquivalencePartitioningTutorial } from '../../models/equivalence-partitioning-tutorial';
+import { EquivalencePartitioningTutorial, TryPartition } from '../../models/equivalence-partitioning-tutorial';
 
 @Component({
   selector: 'app-equivalence-partitioning-tutorial',
@@ -19,20 +19,30 @@ export class EquivalencePartitioningTutorialComponent implements OnInit {
   form!: FormGroup;
   matcher = new MyErrorStateMatcher();
   formIsReady = false;
+  showPartitions = true;
+  tryPartitions: TryPartition[];
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
     private fb: FormBuilder
-    ) { }
+    ) {
+      this.tryPartitions = new Array<TryPartition>();
+     }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
+      this.showPartitions = true;
       const slug = params.get('slug');
       this.formIsReady = false;
       this.equivalencePartitioningTutorial = this.apiService.get<EquivalencePartitioningTutorial>(`https://qatrainingappcontent.blob.core.windows.net/content/equivalence-partitioning/${slug}.json`)
       .pipe(tap(t => {
         this.createBreadcrumbs(t.title, t.slug);
+        if (t.tutorialType === 'try') {
+          this.showPartitions = false;
+        }
+        this.tryPartitions = new Array<TryPartition>();
+
         this.form = this.fb.group({});
         let counter = 1;
         for (let control of t.formControls) {
@@ -47,6 +57,14 @@ export class EquivalencePartitioningTutorialComponent implements OnInit {
               if (validator.errorType === 'minlength') {
                 validators.push(Validators.minLength(+validator.config));
               }
+
+              if (validator.errorType === 'maxlength') {
+                validators.push(Validators.maxLength(+validator.config));
+              }
+
+              if (validator.errorType === 'pattern') {
+                validators.push(Validators.pattern(validator.regex));
+              }
             }
 
             formControl = new FormControl('', Validators.compose(validators));
@@ -58,7 +76,6 @@ export class EquivalencePartitioningTutorialComponent implements OnInit {
 
           counter++;
         }
-        console.log('CHECK',this.form.controls['control-1'].value);
         this.formIsReady = true;
       }));
     });
@@ -73,4 +90,25 @@ export class EquivalencePartitioningTutorialComponent implements OnInit {
 
   }
 
+  togglePartitionsHandler() {
+    this.showPartitions = !this.showPartitions;
+  }
+
+  addTryPartition(type: string) {
+    const partition = new TryPartition();
+    partition.type = type;
+    this.tryPartitions.push(partition);
+  }
+
+  deletePartition(index: number) {
+    this.tryPartitions.splice(index, 1);
+  }
+
+  moveUp(index: number) {
+    this.tryPartitions.splice(index - 1, 0, this.tryPartitions.splice(index, 1)[0]);
+  }
+
+  moveDown(index: number) {
+    this.tryPartitions.splice(index + 1, 0, this.tryPartitions.splice(index, 1)[0]);
+  }
 }

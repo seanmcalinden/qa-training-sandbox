@@ -1,0 +1,42 @@
+{
+    "title": "Required display name",
+    "slug": "required-display-name",
+    "tutorialType": "learn",
+    "difficulty": 1,
+    "userStory": "<p>As a user</p><p>I would like to input my display name<p>So the website displays my favourite name when I'm logged in</p>",
+    "acceptanceCriteria":[
+        "<p>When I enter no characters</p><p>A validation message should appear stating: 'A display name is required'</p>",
+        "<p>When I enter 1 or more characters</p><p>The display name is valid</p>"
+    ],
+    "partitions": [
+         {
+             "type": "Invalid",
+             "description": "Inputting no characters is invalid",
+             "example": "",
+             "exampleDescription": "If no characters are entered, the validation will show the display name as invalid"
+         },
+         {
+             "type": "Valid",
+             "description": "Inputting any characters is valid",
+             "example": "1+",
+             "exampleDescription": "1 or more characters will show the display name as valid"
+         }     
+    ],
+    "formControls": [
+        {
+            "type": "textbox",
+            "showCount": true,
+            "label": "Display name",
+            "placeholder": "Enter a display name",
+            "validations": [
+                {
+                    "errorType": "required",
+                    "message": "A display name is required",
+                    "bug": {
+                        "hasBug": false
+                    }
+                }
+            ]
+        }
+    ]
+}

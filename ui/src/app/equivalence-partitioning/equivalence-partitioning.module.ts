@@ -11,7 +11,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { EquivalencePartitioningTutorialComponent } from './components/equivalence-partitioning-tutorial/equivalence-partitioning-tutorial.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,10 @@ import { EquivalencePartitioningTutorialComponent } from './components/equivalen
     MatInputModule,
     MatCardModule,
     MatIconModule,
+    MatButtonModule,
     MatExpansionModule,
     MatTabsModule,
+    MatTooltipModule,
     FormsModule,
     ReactiveFormsModule
   ]

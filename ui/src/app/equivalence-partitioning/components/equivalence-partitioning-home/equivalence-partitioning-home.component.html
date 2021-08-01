@@ -12,10 +12,13 @@
 
       <mat-tab-group>
         <mat-tab label="Description">
-          <p>
-            Equivalance partitioning is where you divide input data into valid and
-            invalid chunks.
-          </p>
+          <h2>Test coverage</h2>
+          <p>When testing an input of an application (such as a textbox), we need to make sure we have enough tests to know for sure that the feature works as expected.</p>
+          <p>If we have enough tests to cover every scenario, this would mean we have 100% test coverage which is perfect.</p>
+          <p>Equivalence partitioning is a great way to work out the tests we need to gain maximum coverage.</p>
+          <h2>Partitions</h2>
+          <p>In equivalance partitioning, we split <strong>Valid</strong> and <strong>Invalid</strong> scenarios into groups called <strong>Partitions</strong>.</p>
+          <p>Click on the <strong>Example partitions</strong> tab to see an example.</p>
         </mat-tab>
         <mat-tab label="Example partitions">
           <p>
@@ -89,16 +92,34 @@
   </mat-accordion>
 
   <div class="examples">
-    <a routerLink="min-length-username" fxLayoutAlign="left center" fxLayout="row">
+    <a routerLink="learn-required-display-name" fxLayoutAlign="left center" fxLayout="row">
      <div class="icon" fxLayoutAlign="center"><mat-icon inline="true">school</mat-icon></div>
      <div class="link-type">LEARN:</div>
-    <div>Min length username</div></a>
+    <div>Required display name <span class="difficulty">Difficulty: 1/10</span></div></a>
 
-    <a routerLink="example-1" fxLayoutAlign="left center" fxLayout="row">
+    <a routerLink="learn-min-length-username" fxLayoutAlign="left center" fxLayout="row">
+      <div class="icon" fxLayoutAlign="center"><mat-icon inline="true">school</mat-icon></div>
+      <div class="link-type">LEARN:</div>
+     <div>Min length username <span class="difficulty">Difficulty: 2/10</span></div></a>
+
+     <a routerLink="learn-min-max-length-company-name" fxLayoutAlign="left center" fxLayout="row">
+      <div class="icon" fxLayoutAlign="center"><mat-icon inline="true">school</mat-icon></div>
+      <div class="link-type">LEARN:</div>
+     <div>Min max length company name <span class="difficulty">Difficulty: 3/10</span></div></a>
+
+     <a routerLink="learn-numeric-study-days-in-a-week" fxLayoutAlign="left center" fxLayout="row">
+      <div class="icon" fxLayoutAlign="center"><mat-icon inline="true">school</mat-icon></div>
+      <div class="link-type">LEARN:</div>
+     <div>Numeric study days in a week <span class="difficulty">Difficulty: 3/10</span></div></a>
+
+    <a routerLink="try-required-age" fxLayoutAlign="left center" fxLayout="row">
       <div class="icon" fxLayoutAlign="center"><mat-icon inline="true">try</mat-icon></div>
       <div class="link-type">TRY:</div>
-     <div>Example 2</div></a>
+     <div>Required age <span class="difficulty">Difficulty: 3/10</span></div></a>
 
-
+     <a routerLink="try-comment-box" fxLayoutAlign="left center" fxLayout="row">
+      <div class="icon" fxLayoutAlign="center"><mat-icon inline="true">try</mat-icon></div>
+      <div class="link-type">TRY:</div>
+     <div>Comment box <span class="difficulty">Difficulty: 4/10</span></div></a>
   </div>
 </div>

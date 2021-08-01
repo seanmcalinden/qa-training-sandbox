@@ -7,3 +7,52 @@
 .title-icon {
   color: $accentLight;
 }
+
+.difficulty {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: $valid;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+
+.partition-title {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.partition-cards {
+  margin-bottom: 5px;
+}
+
+.example {
+ padding: 10px;
+}
+
+.try-row-container {
+  margin-top: 10px;
+}
+
+.try-row {
+  border: solid 1px $aLittleDark;
+  margin-bottom: 5px;
+}
+
+.try-row-type {
+  padding: 10px;
+  border-right: solid 1px $aLittleDark;
+}
+
+.try-row input {
+  padding-left: 5px;
+}
+
+.try-row-buttons {
+  text-align: right;
+}
+
+.toggle-partitions {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
